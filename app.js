@@ -32,7 +32,7 @@ io.on('connection', function (socket) {
 
     // a user has visited our page - add them to the visitorsData object
     socket.on('dados-visitantes', function (data) {
-        visitorsData[socket.id] = data;
+        dadosVisitantes[socket.id] = data;
 
         // compute and send visitor data to the dashboard when a new user visits our page
         io.emit('updated-stats', computeStats());
@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function () {
         // a user has left our page - remove them from the visitorsData object
-        delete visitorsData[socket.id];
+        delete dadosVisitantes[socket.id];
 
         // compute and send visitor data to the dashboard when a user leaves our page
         io.emit('updated-stats', computeStats());
@@ -64,8 +64,8 @@ function computePageCounts() {
     // sample data in pageCounts object:
     // { "/": 13, "/about": 5 }
     var pageCounts = {};
-    for (var key in visitorsData) {
-        var page = visitorsData[key].page;
+    for (var key in dadosVisitantes) {
+        var page = dadosVisitantes[key].page;
         if (page in pageCounts) {
             pageCounts[page]++;
         } else {
@@ -80,8 +80,8 @@ function computeRefererCounts() {
     // sample data in referrerCounts object:
     // { "http://twitter.com/": 3, "http://stackoverflow.com/": 6 }
     var referrerCounts = {};
-    for (var key in visitorsData) {
-        var referringSite = visitorsData[key].referringSite || '(direct)';
+    for (var key in dadosVisitantes) {
+        var referringSite = dadosVisitantes[key].referringSite || '(direct)';
         if (referringSite in referrerCounts) {
             referrerCounts[referringSite]++;
         } else {
@@ -93,7 +93,7 @@ function computeRefererCounts() {
 
 // get the total active users on our site
 function getActiveUsers() {
-    return Object.keys(visitorsData).length;
+    return Object.keys(dadosVisitantes).length;
 }
 
 
