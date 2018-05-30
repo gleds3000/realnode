@@ -1,0 +1,87 @@
+<script
+    src="/socket.io/socket.io.js">
+</script>
+<script>
+    var socket =io();
+ var dadosVisitantes = {
+     referringSite: document.referrer,
+     page: location.pathname
+ }
+ socket.emit('dados-visitantes', dadosVisitantes);
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dashboard online - analitico </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: #F2F2F0;
+            }
+
+            .navbar {
+                background-color: #373737;
+                padding: 5px;
+            }
+
+            .navbar a {
+                color: #8C8C8C;
+                font-size: 1.5em;
+            }
+
+            .coligo {
+                color: #D0D0D0;
+                font-size: 0.8em;
+            }
+        </style>
+
+    </head>
+<body>
+    <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Real-Time Analytics
+                    <span class="coligo"> | GLeds3000</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>execute uma nova aba para poder testar o dashboard</h3>
+                <h4 class="header">
+                    <a href="/dashboard">Dashboard Analitico</a>
+                </h4>
+                <h3>teste do dashboar online </h3>
+                <h4 class="header">
+                    <a href="/">Inicio</a>
+                </h4>
+                <h4 class="header">
+                    <a href="/about">Sobre</a>
+                </h4>
+                <h4 class="header">
+                    <a href="/contact">Contato</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var visitorData = {
+            referringSite: document.referrer,
+            page: location.pathname
+        }
+        socket.emit('dados-visitantes', visitorData);
+    </script>
+
+</body>
+
+</html>
